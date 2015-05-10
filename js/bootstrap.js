@@ -125,6 +125,16 @@ require(
             }
         ];
 
+        var getURLParameter = function(name) {
+            return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null
+        };
+
+        var isAdmin = getURLParameter( 'admin' ) === 'true';
+
+        if( isAdmin ){
+            $( 'body').addClass( 'admin');
+        }
+
         /** HELPERS */
 
         var gotoSimonProfile = function () {
@@ -152,41 +162,15 @@ require(
 
         var showAdmin = function(){
 
-            var $adminContainer = $('.admin-container');
-
-            $adminContainer.html( adminTemplate.render( {
+            $( '#app' ).html( adminTemplate.render( {
                 scoreCards: scoreCards,
                 museums: MUSEUMS
             } ) );
 
-            $adminContainer.find('.admin' ).css({
-                width: $adminContainer.width(),
-                left: $adminContainer.width() + 5
-            });
-
-            $adminContainer.show();
-
-            setTimeout(function () {
-                $adminContainer.find('.admin' ).css({
-                    left: 0
-                });
-            }, 10);
-
         };
 
         var hideAdmin = function(){
-
-            var $adminContainer = $('.admin-container' );
-
-            $adminContainer.find('.admin' ).css({
-                left: $adminContainer.width()+5
-            });
-
-            setTimeout(function () {
-                $adminContainer.html('' );
-                $adminContainer.hide();
-            }, 250);
-
+            gotoSimonProfile();
         };
 
         var initScoring = function ( $container, index ) {
@@ -209,7 +193,7 @@ require(
                         $container.append( scoreCardsFinished );
                     } else {
 
-                        initScoring( $container, index+1 );
+                        initScoring( $container, index + 1 );
                     }
                 });
             };
@@ -219,7 +203,7 @@ require(
                     if ( index == scoreCards.length -1 ) {
                         $container.append( scoreCardsFinished );
                     } else {
-                        initScoring( $container, index+1 );
+                        initScoring( $container, index + 1 );
                     }
                 });
             };
@@ -251,6 +235,8 @@ require(
                 msg.text +'</div>'
             );
         };
+
+
 
         /** 'ROUTING' */
 
@@ -411,5 +397,6 @@ require(
                 addChatMessage( msg );
             }
         });
+
     }
 );
