@@ -47,7 +47,10 @@ require(
         /** CONSTANTS */
 
         var match;
+        var socket;
+        var username;
         var buddyMatch;
+        var chatHistory = [];
 
         var MUSEUMS = {
 
@@ -242,10 +245,19 @@ require(
             $('.'+ resultId ).show(100);
         };
 
+        var addChatMessage = function ( msg ) {
+            $('#app .chat-window' ).append(
+                '<div class="chat-message '+ ( ( msg.user === username ) ? 'you' : 'other' ) +'" data-id="'+ msg.id +'">'+
+                msg.text +'</div>'
+            );
+        };
+
         /** 'ROUTING' */
 
         $(document ).on('submit', '.intro-form', function ( e ) {
             e.preventDefault();
+
+            username = $('#email' ).val() || 'test';
 
             gotoSimonProfile();
         });
@@ -336,6 +348,11 @@ require(
 
             $chatContainer.html( chatTemplate.render({}) );
 
+            if ( chatHistory && chatHistory.length ) {
+
+                chatHistory.forEach( addChatMessage );
+            }
+
             $chatContainer.find('.chat' ).css({
                 width: $chatContainer.width(),
                 left: $chatContainer.width() + 5
@@ -368,10 +385,31 @@ require(
 
         $(document ).on('submit', '.chat-entry', function (e) {
             e.preventDefault();
+
+            socket.emit('message', {
+                id : 'chat-id-'+ (new Date()).getTime(),
+                user: username,
+                text: $('.chat-input' ).val()
+            });
         });
+
+
 
         /** KICKOFF */
 
         $('#app').html( introTemplate.render({}) );
+
+        socket = io( 'http://'+ document.location.host );
+
+        socket.on('message', function ( msg ) {
+
+            chatHistory.push( msg );
+
+            if ( $('#app .chat-window' ).length &&
+                ! $('#app .chat-message[data-id='+ msg.id +']' ).length
+            ) {
+                addChatMessage( msg );
+            }
+        });
     }
 );
