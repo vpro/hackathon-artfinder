@@ -11,6 +11,8 @@
                 <th>image</th>
                 <th>title</th>
                 <th>description</th>
+                <th>edit</th>
+                <th>delete</th>
             </tr>
         </thead>
 
@@ -22,6 +24,8 @@
                 <td><img class="admin-data-thumb" style="background-image: url('{{image}}')"></td>
                 <td>{{title}}</td>
                 <td>{{description}}</td>
+                <td><i class="glyphicon glyphicon-edit"></i></td>
+                <td><i class="glyphicon glyphicon-trash"></i></td>
             </tr>
             {{/each}}
         </tbody>
@@ -37,9 +41,11 @@
                 <th>#</th>
                 <th>match</th>
                 <th>image</th>
-                <th>artist</th>
                 <th>title</th>
+                <th>artist</th>
                 <th>date</th>
+                <th>edit</th>
+                <th>delete</th>
             </tr>
         </thead>
 
@@ -49,9 +55,11 @@
                     <th scope="row">{{@index}}</th>
                     <td>{{match}}</td>
                     <td><img class="admin-data-thumb" style="background-image: url('{{image}}')"></td>
-                    <td>{{artist}}</td>
                     <td>{{title}}</td>
+                    <td>{{artist}}</td>
                     <td>{{date}}</td>
+                    <td><i class="glyphicon glyphicon-edit"></i></td>
+                    <td><i class="glyphicon glyphicon-trash"></i></td>
                 </tr>
             {{/each}}
         </tbody>
