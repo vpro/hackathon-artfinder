@@ -23,6 +23,7 @@ require(
         'js/lib/template!templates/matches.html',
         'js/lib/template!templates/tabs.html',
         'js/lib/template!templates/score-card.html',
+        'js/lib/template!templates/chat.html',
         'js/lib/template!templates/admin.html',
         'handlebars',
         'jquery',
@@ -35,6 +36,7 @@ require(
                matchesTemplate,
                tabsTemplate,
                scoreCardTemplate,
+               chatTemplate,
                adminTemplate,
                Handlebars, $ ) {
 
@@ -256,10 +258,6 @@ require(
             initScoring( $('#app' ).find('.score-cards'), 0 );
         });
 
-        $(document ).on('click', '.matches-choice', function () {
-            showMatchResults( $(this ).data('match') );
-        });
-
         $(document ).on('click', '.tab-matches', function ( e ) {
 
              e.preventDefault();
@@ -292,6 +290,49 @@ require(
             showMatchResults('matches-museums');
          });
 
+
+        $(document ).on('click', '.matches-choice', function () {
+            showMatchResults( $(this ).data('match') );
+        });
+
+
+        $(document ).on('click', '.match-chat-button', function ( e ) {
+
+            var $chatContainer = $('#app .chat-container' );
+
+            e.preventDefault();
+
+            $chatContainer.html( chatTemplate.render({}) );
+
+            $chatContainer.find('.chat' ).css({
+                width: $chatContainer.width(),
+                left: $chatContainer.width() + 5
+            });
+
+            $chatContainer.show();
+            setTimeout(function () {
+                $chatContainer.find('.chat' ).css({
+                    left: 0
+                });
+            }, 10);
+        });
+
+
+        $(document ).on('click', '.chat-header-back', function (e) {
+
+            var $chatContainer = $('#app .chat-container' );
+
+            e.preventDefault();
+
+            $chatContainer.find('.chat' ).css({
+                left: $chatContainer.width()+5
+            });
+
+            setTimeout(function () {
+                $chatContainer.html('' );
+                $chatContainer.hide();
+            }, 250);
+        });
 
         /** KICKOFF */
 
