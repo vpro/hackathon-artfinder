@@ -4,6 +4,13 @@ Find the museum you should visit and the buddy to visit it with.
 Entry for the Hacking Culture Bootcamp http://waag.org/nl/event/hacking-culture-bootcamp.
 
 
+## Install
+
+Run `npm install && gulp install`. 
+To see the site run `gulp serve` and visit 
+
+[http://localhost:4000](http://localhost:4000)
+
 ## Todo
 
 ### Basic, find a museum
