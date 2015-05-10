@@ -334,6 +334,10 @@ require(
             }, 250);
         });
 
+        $(document ).on('submit', '.chat-entry', function (e) {
+            e.preventDefault();
+        });
+
         /** KICKOFF */
 
         $('#app').html( introTemplate.render({}) );

@@ -70,7 +70,31 @@
 }
 
 .chat-window {
-    margin-top: 30px;
+    position: absolute;
+    padding-top: 30px;
+    top: 40px;
+    bottom: 0;
+    left: 10px;
+    right: 10px;
+    overflow-y: auto;
+}
+
+.chat-message {
+    width: 80%;
+    margin-bottom: 10px;
+    padding: 20px;
+
+    border-radius: 10px;
+
+    &.you {
+        background-color: $lightgrey;
+    }
+
+    &.other {
+        background-color: $mediumgrey;
+        color: $white;
+        margin-left: 18%;
+    }
 }
 
 .chat-entry {
@@ -80,7 +104,19 @@
     right: 0;
     z-index: 4;
 
-    height: 40px;
+    height: 45px;
+    padding: 5px 10px 0;
 
     background-color: $lightgrey;
 }
+
+.chat-input {
+    display: inline-block;
+    width: 67%;
+}
+
+.chat-input-submit {
+    display: inline-block;
+    width: 30%;
+}
+
