@@ -147,12 +147,42 @@ require(
             }) );
         };
 
-        var gotoAdmin = function(){
+        var showAdmin = function(){
 
-            $('#app').html( adminTemplate.render( {
+            var $adminContainer = $('.admin-container');
+
+            $adminContainer.html( adminTemplate.render( {
                 scoreCards: scoreCards,
                 museums: MUSEUMS
             } ) );
+
+            $adminContainer.find('.admin' ).css({
+                width: $adminContainer.width(),
+                left: $adminContainer.width() + 5
+            });
+
+            $adminContainer.show();
+
+            setTimeout(function () {
+                $adminContainer.find('.admin' ).css({
+                    left: 0
+                });
+            }, 10);
+
+        };
+
+        var hideAdmin = function(){
+
+            var $adminContainer = $('.admin-container' );
+
+            $adminContainer.find('.admin' ).css({
+                left: $adminContainer.width()+5
+            });
+
+            setTimeout(function () {
+                $adminContainer.html('' );
+                $adminContainer.hide();
+            }, 250);
 
         };
 
@@ -227,9 +257,11 @@ require(
         });
 
         $(document).on('click', '.button-admin', function( e ){
+            showAdmin();
+        });
 
-            gotoAdmin();
-
+        $( document ).on('click', '.admin-header-back', function (e) {
+            hideAdmin();
         });
 
         $(document ).on('click', '.profile [href], .matches [href], .tab-score', function ( e ) {
@@ -318,7 +350,7 @@ require(
         });
 
 
-        $(document ).on('click', '.chat-header-back', function (e) {
+        $( document ).on('click', '.chat-header-back', function (e) {
 
             var $chatContainer = $('#app .chat-container' );
 
