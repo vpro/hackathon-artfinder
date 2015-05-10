@@ -1,0 +1,18 @@
+<div class="profile">
+
+    <h1 class="text-center profile-header">Simon</h1>
+
+    <div class="personal">
+        <div class="profile-image" style="background-image:url('{{profileImage}}')"></div>
+    </div>
+
+    <dl class="profile-match">
+        <dt>Best museum match:</dt>
+        <dd>
+            {{^match}}None yet, try <a href="#score">scoring</a> some art pieces{{/match}}
+            {{#match}}{{title}}{{/match}}
+        </dd>
+    </dl>
+
+    {{> tabs}}
+</div>

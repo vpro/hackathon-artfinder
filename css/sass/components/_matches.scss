@@ -1,0 +1,34 @@
+.matches-header {
+    margin: 0;
+    height: 1.5em;
+    background-color: $turqoise;
+    line-height: 1.5em;
+    color: $white;
+}
+
+.matches-intro {
+    padding: 50px 10px;
+    line-height: 1.6em;
+}
+
+.match-row {
+    border-top: 1px solid $lightgrey;
+    padding: 10px;
+
+    .match-row-image {
+        padding: 10px 5px 5px;
+        vertical-align: top;
+    }
+}
+
+.match-row-image-container {
+    width: 70px;
+    height: 70px;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.match-row-meta {
+    padding: 0 10px;
+}

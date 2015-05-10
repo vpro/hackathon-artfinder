@@ -1,0 +1,36 @@
+.profile-header {
+    margin: 0;
+    height: 1.5em;
+    background-color: $turqoise;
+    line-height: 1.5em;
+    color: $white;
+}
+
+.personal {
+    margin-top: 30px;
+}
+
+.profile-image {
+    width: 180px;
+    height: 180px;
+    margin: 0 auto;
+
+    border:3px solid $white;
+    box-shadow: -2px 2px 8px rgba($darkgrey, 0.6);
+
+    border-radius: 90px;
+    background-size: cover;
+    background-position: center center;
+}
+
+.profile-match {
+    padding: 30px 20px 0;
+
+    dt {
+        font-weight: bold;
+    }
+
+    dd {
+
+    }
+}
