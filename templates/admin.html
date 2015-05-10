@@ -1,0 +1,61 @@
+<div class="data">
+
+    <h2 class="text-center matches-header">Museums</h2>
+
+    <table class="table table-bordered table-striped">
+
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>id</th>
+                <th>image</th>
+                <th>title</th>
+                <th>description</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {{#each museums}}
+            <tr>
+                <th scope="row">{{@index}}</th>
+                <td>{{@key}}</td>
+                <td><img class="admin-data-thumb" style="background-image: url('{{image}}')"></td>
+                <td>{{title}}</td>
+                <td>{{description}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+
+    </table>
+
+    <h2 class="text-center matches-header">Art</h2>
+
+    <table class="table table-bordered table-striped">
+
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>match</th>
+                <th>image</th>
+                <th>artist</th>
+                <th>title</th>
+                <th>date</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {{#each scoreCards}}
+                <tr>
+                    <th scope="row">{{@index}}</th>
+                    <td>{{match}}</td>
+                    <td><img class="admin-data-thumb" style="background-image: url('{{image}}')"></td>
+                    <td>{{artist}}</td>
+                    <td>{{title}}</td>
+                    <td>{{date}}</td>
+                </tr>
+            {{/each}}
+        </tbody>
+
+    </table>
+
+</div>

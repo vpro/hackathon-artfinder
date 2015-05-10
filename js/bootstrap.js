@@ -23,6 +23,7 @@ require(
         'js/lib/template!templates/matches.html',
         'js/lib/template!templates/tabs.html',
         'js/lib/template!templates/score-card.html',
+        'js/lib/template!templates/admin.html',
         'handlebars',
         'jquery',
         'http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js'
@@ -34,6 +35,7 @@ require(
                matchesTemplate,
                tabsTemplate,
                scoreCardTemplate,
+               adminTemplate,
                Handlebars, $ ) {
 
         Handlebars.registerPartial({
@@ -48,32 +50,65 @@ require(
         var MUSEUMS = {
 
             'kroller' : {
-                  title: 'Kroller Muller Museum',
-                  description: 'The Kröller-Müller Museum is an art museum and sculpture garden, located in the Hoge Veluwe National Park in Otterlo in the Netherlands. ',
-                  image: 'https://lh6.ggpht.com/MRtGp7GG2Uu1U3W0_OCOb-1ZjjLyDkN7K63ceV11yUgcQVQ6Je0jjb5w6g=fbw=1-s50'
-              },
+                title: 'Kroller Muller Museum',
+                description: 'The Kröller-Müller Museum is an art museum and sculpture garden, located in the Hoge Veluwe National Park in Otterlo in the Netherlands. ',
+                image: 'https://lh6.ggpht.com/MRtGp7GG2Uu1U3W0_OCOb-1ZjjLyDkN7K63ceV11yUgcQVQ6Je0jjb5w6g=fbw=1-s50'
+            },
 
             'stedelijk' : {
                 title: 'Stedelijk Museum',
                 description: 'The Stedelijk Museum Amsterdam, colloquially known as the Stedelijk, is a museum for modern art, contemporary art, and design located in Amsterdam, the Netherlands.',
                 image: 'http://www.tempelhof.nl/resources/images/omgeving/standard/thumb_stedelijk_museum.jpg'
+            },
+
+            'vangogh': {
+                'title': 'Van Gogh Museum',
+                'description': 'Step into Van Gogh\'s world. Discover the world\'s largest collection of works by Vincent van Gogh at the Van Gogh Museum, featuring masterpieces such as Almond Blossom and The Bedroom.',
+                'image': 'http://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Van_Gogh_Museum_Amsterdam.jpg/1280px-Van_Gogh_Museum_Amsterdam.jpg'
+            },
+
+            'rijksmuseum': {
+                title: 'Rijksmuseum',
+                description: 'At the Rijksmuseum, art and history take on new meaning for a broad-based, contemporary national and international audience.',
+                image: 'http://c573862.ssl.cf0.rackcdn.com/1/2/79674/1068060/4119276779_949aaba2d5_o_900.jpg'
             }
         };
 
         var scoreCards = [
             {
-                  image : "http://whatsupwithamsterdam.com/wordpress/wp-content/uploads/2012/09/km6.jpg",
-                  artist: 'Jean Dubuffet',
-                  date: '1973',
-                  title: 'Jardin d\'émail',
-                  match: 'kroller'
+                image : "http://whatsupwithamsterdam.com/wordpress/wp-content/uploads/2012/09/km6.jpg",
+                artist: 'Jean Dubuffet',
+                date: '1973',
+                title: 'Jardin d\'émail',
+                match: 'kroller'
             },
             {
-                  image : 'https://www.artifex.nu/edit/upload/malevich1.png',
-                  artist: 'Kazimir Malevich',
-                  date: '1915',
-                  title: 'Suprematist composition (with 8 red rectangles)',
-                  match: 'stedelijk'
+                image : 'https://www.artifex.nu/edit/upload/malevich1.png',
+                artist: 'Kazimir Malevich',
+                date: '1915',
+                title: 'Suprematist composition (with 8 red rectangles)',
+                match: 'stedelijk'
+            },
+            {
+                image: 'http://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/1280px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg',
+                artist: 'Vincent van Gogh',
+                date: '1889',
+                title: 'De sterrennacht',
+                match: 'vangogh'
+            },
+            {
+                image: 'http://www.entoen.nu/media/_600/19.jpg',
+                artist: 'Rembrandt van Rijn',
+                date: '1642',
+                title: 'De Nachtwacht',
+                match: 'rijksmuseum'
+            },
+            {
+                image: 'http://lh4.ggpht.com/XVSITSSFzZEdNM1SpHbJF12MqBvW3KTL2qjNta1-KMiOVd3s-p-LiQ2sXHsgRAs3GeMpiin_TwvLi9jpIySt1vLDdA=s500-c',
+                artist: 'Jan Asselijn',
+                date: '1650',
+                title: 'De bedreigde zwaan',
+                match: 'rijksmuseum'
             }
         ];
         var scoreCardsFinished = '<div class="score-cards-finished">Oops, looks like you\'ve rated all our art pieces! Hope you found a match, or try again later!</div>';
@@ -108,6 +143,15 @@ require(
                     }
                 ]
             }) );
+        };
+
+        var gotoAdmin = function(){
+
+            $('#app').html( adminTemplate.render( {
+                scoreCards: scoreCards,
+                museums: MUSEUMS
+            } ) );
+
         };
 
         var initScoring = function ( $container, index ) {
@@ -178,6 +222,12 @@ require(
             e.preventDefault();
 
             gotoSimonProfile();
+        });
+
+        $(document).on('click', '.button-admin', function( e ){
+
+            gotoAdmin();
+
         });
 
         $(document ).on('click', '.profile [href], .matches [href], .tab-score', function ( e ) {
