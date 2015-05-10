@@ -40,7 +40,25 @@ require(
           tabs: tabsTemplate.template
         });
 
+        /** CONSTANTS */
+
         var match;
+        var buddyMatch;
+
+        var MUSEUMS = {
+
+            'kroller' : {
+                  title: 'Kroller Muller Museum',
+                  description: 'The Kröller-Müller Museum is an art museum and sculpture garden, located in the Hoge Veluwe National Park in Otterlo in the Netherlands. ',
+                  image: 'https://lh6.ggpht.com/MRtGp7GG2Uu1U3W0_OCOb-1ZjjLyDkN7K63ceV11yUgcQVQ6Je0jjb5w6g=fbw=1-s50'
+              },
+
+            'stedelijk' : {
+                title: 'Stedelijk Museum',
+                description: 'The Stedelijk Museum Amsterdam, colloquially known as the Stedelijk, is a museum for modern art, contemporary art, and design located in Amsterdam, the Netherlands.',
+                image: 'http://www.tempelhof.nl/resources/images/omgeving/standard/thumb_stedelijk_museum.jpg'
+            }
+        };
 
         var scoreCards = [
             {
@@ -48,28 +66,26 @@ require(
                   artist: 'Jean Dubuffet',
                   date: '1973',
                   title: 'Jardin d\'émail',
-                  match: {
-                      title: 'Kroller Muller Museum',
-                      description: 'The Kröller-Müller Museum is an art museum and sculpture garden, located in the Hoge Veluwe National Park in Otterlo in the Netherlands. ',
-                      image: 'https://lh6.ggpht.com/MRtGp7GG2Uu1U3W0_OCOb-1ZjjLyDkN7K63ceV11yUgcQVQ6Je0jjb5w6g=fbw=1-s50'
-                  }
+                  match: 'kroller'
             },
             {
                   image : 'https://www.artifex.nu/edit/upload/malevich1.png',
                   artist: 'Kazimir Malevich',
                   date: '1915',
                   title: 'Suprematist composition (with 8 red rectangles)',
-                match: {
-                    title: 'Stedelijk Museum',
-                    description: 'The Stedelijk Museum Amsterdam, colloquially known as the Stedelijk, is a museum for modern art, contemporary art, and design located in Amsterdam, the Netherlands.',
-                    image: 'http://www.tempelhof.nl/resources/images/omgeving/standard/thumb_stedelijk_museum.jpg'
-                }
+                  match: 'stedelijk'
             }
         ];
         var scoreCardsFinished = '<div class="score-cards-finished">Oops, looks like you\'ve rated all our art pieces! Hope you found a match, or try again later!</div>';
 
-        $('#app').html( introTemplate.render({}) );
+        var BUDDIES = [
+            {
+                name : 'David'
 
+            }
+        ];
+
+        /** HELPERS */
 
         var gotoSimonProfile = function () {
 
@@ -101,7 +117,7 @@ require(
             var like = function () {
 
                 $(this).addClass('rotate-left').delay(700).fadeOut( 1, function () {
-                    match = scoreCards[ index ].match;
+                    match = MUSEUMS[ scoreCards[ index ].match ];
                     $('#app .tab-matches' ).append('<span class="badge">1</span>');
 
                     if ( index == scoreCards.length -1 ) {
@@ -132,7 +148,15 @@ require(
             $container.find('> *').on('click', '.score-dislike', dislike.bind( $container.find('> *') ) );
         };
 
-        /* fake clickers */
+        var showMatchResults = function ( resultId ) {
+            $('.matches-choice').removeClass('active');
+            $('[data-match="'+ resultId +'"]' ).addClass('active');
+
+            $('.matches-results' ).hide();
+            $('.'+ resultId ).show(100);
+        };
+
+        /** 'ROUTING' */
 
         $(document ).on('submit', '.intro-form', function ( e ) {
             e.preventDefault();
@@ -172,12 +196,21 @@ require(
             initScoring( $('#app' ).find('.score-cards'), 0 );
         });
 
+        $(document ).on('click', '.matches-choice', function () {
+            showMatchResults( $(this ).data('match') );
+        });
+
         $(document ).on('click', '.tab-matches', function ( e ) {
 
              e.preventDefault();
 
              $('#app').html( matchesTemplate.render({
-                 match: match,
+                museums :{
+                    match: match
+                },
+                 buddies : {
+                     match: buddyMatch
+                 },
                  buttons : [
                      {
                          id: 'profile',
@@ -194,6 +227,13 @@ require(
                      }
                  ]
              }) );
+
+            showMatchResults('matches-museums');
          });
+
+
+        /** KICKOFF */
+
+        $('#app').html( introTemplate.render({}) );
     }
 );

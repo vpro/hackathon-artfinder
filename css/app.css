@@ -181,8 +181,22 @@ body {
   line-height: 1.5em;
   color: #fff; }
 
+.matches-choices {
+  width: 100%;
+  padding: 10px 10px; }
+
+.matches-choice {
+  width: 50%; }
+  .matches-choice.active {
+    background-color: #ddd; }
+    .matches-choice.active:focus {
+      outline: 0; }
+
+.matches-results {
+  display: none; }
+
 .matches-intro {
-  padding: 50px 10px;
+  padding: 30px 10px;
   line-height: 1.6em; }
 
 .match-row {

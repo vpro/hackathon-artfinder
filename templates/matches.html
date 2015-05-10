@@ -2,31 +2,71 @@
 
     <h1 class="text-center matches-header">Simon's matches</h1>
 
-    <div class="matches-intro">
-        Matches based on <select>
-        <option>last week's</option>
-        <option>last month's</option>
-        <option>last year's</option>
-    </select> scores.
-
-        {{^match}}
-        <p>None yet, try <a href="#score">scoring</a> some art pieces
-        </p>{{/match}}
-
+    <div class="btn-group matches-choices">
+        <button type="button" data-match="matches-museums" class="btn btn-default matches-choice matches-choice-museums">museums</button>
+        <button type="button" data-match="matches-buddies" class="btn btn-default matches-choice matches-choice-museums">buddies</button>
     </div>
 
+    <div class="matches-results matches-museums">
+    {{#museums}}
+        <div class="matches-intro">
+            Museum matches based on <select>
+            <option>last week's</option>
+            <option>last month's</option>
+            <option>last year's</option>
+        </select> scores.
 
-    {{#match}}
-    <table class="match-row">
-        <tr>
-            <td class="match-row-image"><div class="match-row-image-container" style="background-image: url('{{image}}')"></div></td>
-            <td class="match-row-meta">
-                <h4>{{title}}</h4>
-                <p>{{description}}</p>
-            </td>
-        </tr>
-    </table>
-    {{/match}}
+            {{^match}}
+            <p>None yet, try <a href="#score">scoring</a> some art pieces
+            </p>{{/match}}
+
+        </div>
+
+
+        {{#match}}
+        <table class="match-row">
+            <tr>
+                <td class="match-row-image"><div class="match-row-image-container" style="background-image: url('{{image}}')"></div></td>
+                <td class="match-row-meta">
+                    <h4>{{title}}</h4>
+                    <p>{{description}}</p>
+                </td>
+            </tr>
+        </table>
+        {{/match}}
+    {{/museums}}
+    </div>
+
+    <div class="matches-results matches-buddies">
+    {{#buddies}}
+        <div class="matches-intro">
+            Buddy matches based on <select>
+            <option>last week's</option>
+            <option>last month's</option>
+            <option>last year's</option>
+        </select> scores.
+
+            {{^match}}
+            <p>None yet, try <a href="#score">scoring</a> some art pieces
+            </p>{{/match}}
+
+        </div>
+
+
+        {{#match}}
+        <table class="match-row">
+            <tr>
+                <td class="match-row-image"><div class="match-row-image-container" style="background-image: url('{{image}}')"></div></td>
+                <td class="match-row-meta">
+                    <h4>{{name}}</h4>
+                </td>
+                <td class="match-row-chat"></td>
+            </tr>
+        </table>
+        {{/match}}
+    {{/buddies}}
+    </div>
+
 
 
     {{> tabs}}
