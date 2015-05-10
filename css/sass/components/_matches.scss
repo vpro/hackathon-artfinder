@@ -20,6 +20,12 @@
             outline: 0;
         }
     }
+
+    .badge {
+        top: -2px;
+        left: 3px;
+        background-color: red;
+    }
 }
 
 .matches-results {
@@ -32,11 +38,12 @@
 }
 
 .match-row {
-    border-top: 1px solid $lightgrey;
     padding: 10px;
+    width: 100%;
+    border-top: 1px solid $lightgrey;
 
     .match-row-image {
-        padding: 10px 5px 5px;
+        padding: 10px 5px 5px 10px;
         vertical-align: top;
     }
 }
@@ -51,4 +58,30 @@
 
 .match-row-meta {
     padding: 0 10px;
+    width: 100%;
+}
+
+.match-chat {
+    border: 0;
+    border-radius: 0;
+
+    &:hover, &:active, &focus {
+        background-color: $white;
+        outline: 0;
+    }
+
+    .glyphicon {
+        font-size: 1.8em;
+    }
+
+    .match-chat-icon-two {
+        position: relative;
+        z-index:2;
+        left: -10px;
+        top: 3px;
+        transform: scale(-1, 1);
+
+        color: $mediumgrey;
+        font-size: 1.5em;
+    }
 }

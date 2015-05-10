@@ -80,8 +80,8 @@ require(
 
         var BUDDIES = [
             {
-                name : 'David'
-
+                name : 'David',
+                image: 'https://pbs.twimg.com/profile_images/378800000546409603/914b4e0eace4c84012156083eb4a7c59_400x400.jpeg'
             }
         ];
 
@@ -117,8 +117,14 @@ require(
             var like = function () {
 
                 $(this).addClass('rotate-left').delay(700).fadeOut( 1, function () {
+
+                    // Fake match when liking 1 piece
                     match = MUSEUMS[ scoreCards[ index ].match ];
-                    $('#app .tab-matches' ).append('<span class="badge">1</span>');
+                    buddyMatch = BUDDIES[0];
+
+                    $('#app .tab-matches .badge' ).remove();
+                    $('#app .tab-matches').append('<span class="badge">2</span>');
+
 
                     if ( index == scoreCards.length -1 ) {
                         $container.append( scoreCardsFinished );
@@ -151,6 +157,10 @@ require(
         var showMatchResults = function ( resultId ) {
             $('.matches-choice').removeClass('active');
             $('[data-match="'+ resultId +'"]' ).addClass('active');
+
+            if ( $('[data-match="'+ resultId +'"] .badge' ).length ) {
+                $('[data-match="'+ resultId +'"] .badge' ).remove();
+            }
 
             $('.matches-results' ).hide();
             $('.'+ resultId ).show(100);
@@ -205,12 +215,13 @@ require(
              e.preventDefault();
 
              $('#app').html( matchesTemplate.render({
-                museums :{
+                 museums :{
                     match: match
-                },
+                 },
                  buddies : {
                      match: buddyMatch
                  },
+                 buddyBadge : ( $('#app .tab-matches .badge' ).length > 0 ), /* to show a buddy badge */
                  buttons : [
                      {
                          id: 'profile',

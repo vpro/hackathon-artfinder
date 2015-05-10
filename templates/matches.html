@@ -4,7 +4,9 @@
 
     <div class="btn-group matches-choices">
         <button type="button" data-match="matches-museums" class="btn btn-default matches-choice matches-choice-museums">museums</button>
-        <button type="button" data-match="matches-buddies" class="btn btn-default matches-choice matches-choice-museums">buddies</button>
+        <button type="button" data-match="matches-buddies" class="btn btn-default matches-choice matches-choice-museums">buddies
+        {{#buddyBadge}}<span class="badge">1</span>{{/buddyBadge}}
+        </button>
     </div>
 
     <div class="matches-results matches-museums">
@@ -60,7 +62,12 @@
                 <td class="match-row-meta">
                     <h4>{{name}}</h4>
                 </td>
-                <td class="match-row-chat"></td>
+                <td class="match-row-chat">
+                    <button type="button" class="btn btn-default match-chat-button" data-chat="">
+                        <span class="glyphicon glyphicon-comment"></span>
+                        <span class="glyphicon glyphicon-comment match-chat-icon-two"></span>
+                    </button>
+                </td>
             </tr>
         </table>
         {{/match}}
