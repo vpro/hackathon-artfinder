@@ -22,5 +22,10 @@ body {
 }
 
 /* sorry, this really is !important :) */
-.btn:focus, .btn:active:focus, .btn.active:focus { outline: none; ! important; outline-style: none; }
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus {
+    outline: none !important;
+    outline-style: none;
+}
 
